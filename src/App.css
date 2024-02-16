@@ -1,0 +1,22 @@
+.Auth-container{
+    background-image: url(./assets/images/auth-bg.png);
+    background-size: cover;
+}
+
+.overlay{
+    background: linear-gradient(45deg , rgba(47,140,96,0.4), rgba(0,0,0, 0.4));
+}
+
+.sidebar-container .ps-sidebar-container{
+    color: white;
+    background-color: #1f263E;
+    height: 100vh;
+}
+
+.sidebar-container .ps-sidebar-container .ps-menu-button:hover{
+    background-color: rgba(0,176,77, 0.2);
+}
+
+.header-cont{
+    background-image: url(../src/assets/images/bgHeader.png);
+}
