@@ -22,7 +22,7 @@ function App() {
   let saveAdminData = () => {
     let encodedToken = localStorage.getItem("adminToken");
     let decodedToken = jwtDecode(encodedToken);
-    console.log(decodedToken);
+    // console.log(decodedToken);
     setadminData(decodedToken);
   };
 

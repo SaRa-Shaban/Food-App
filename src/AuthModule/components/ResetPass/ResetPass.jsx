@@ -88,7 +88,7 @@ export default function ResetPass() {
                       })}
                     />
                   </div>
-                  {errors.email && (
+                  {errors.seed && (
                     <p className="alert alert-danger">{errors.seed.message}</p>
                   )}
 

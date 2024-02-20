@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function Navbar({ adminData }) {
-  console.log(adminData);
+  // console.log(adminData);
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -18,12 +18,11 @@ export default function Navbar({ adminData }) {
             <span className="navbar-toggler-icon" />
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-
-          <form className="d-flex" role="search">
+            <form className="d-flex w-75" role="search">
               <input
                 className="form-control me-2"
                 type="search"
-                placeholder="Search"
+                placeholder="Search here"
                 aria-label="Search"
               />
             </form>
@@ -31,23 +30,22 @@ export default function Navbar({ adminData }) {
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
               <li className="nav-item">
                 <a className="nav-link" href="#">
-                  Link
-                </a>
-              </li>
-
-              <li className="nav-item">
-                <a className="nav-link" href="#">
-                  Link
-                </a>
-              </li>
-
-              <li className="nav-item">
-                <a className="nav-link" href="#">
                   {adminData?.userName}
                 </a>
               </li>
+
+              <li className="nav-item">
+                <a className="nav-link" href="#">
+                <i className="fa-solid fa-chevron-down"></i>
+                </a>
+              </li>
+
+              <li className="nav-item">
+                <a className="nav-link" href="#">
+                  <i className="fa fa-bell"></i>
+                </a>
+              </li>
             </ul>
-            
           </div>
         </div>
       </nav>

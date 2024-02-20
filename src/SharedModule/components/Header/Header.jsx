@@ -1,14 +1,14 @@
 import React from "react";
-import headerBg from '../../../assets/images/headerBg.png'
 
-export default function Header({ title, description }) {
+
+export default function Header({ title, description , headerBg }) {
   return (
     <>
-      <div className="container-fluid header-cont p-4">
+      <div className="container-fluid header-cont p-4 mt-3">
         <div className="row justify-content-between">
           <div className="col-md-5 d-flex align-items-center">
-            <div className="header-content">
-              <h2>{title}</h2>
+            <div className="header-content p-4">
+              <h2>{title}!</h2>
               <p>{description}</p>
             </div>
           </div>

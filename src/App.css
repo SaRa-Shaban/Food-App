@@ -1,6 +1,7 @@
 .Auth-container{
     background-image: url(./assets/images/auth-bg.png);
-    background-size: cover;
+    background-size: 100%;
+    background-repeat: no-repeat;
 }
 
 .overlay{
@@ -13,10 +14,23 @@
     height: 100vh;
 }
 
+
+
 .sidebar-container .ps-sidebar-container .ps-menu-button:hover{
     background-color: rgba(0,176,77, 0.2);
 }
 
+
+
 .header-cont{
     background-image: url(../src/assets/images/bgHeader.png);
+    background-position: center;
+    background-size: 100% 100%;
+}
+
+.not-found{
+    background-image: url(./assets/images/notFoundbg.png);
+    background-size: 70%;
+    background-repeat: no-repeat;
+    background-position: right;
 }
