@@ -12,17 +12,56 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import noData from "../../../assets/images/no-data.png";
 
-export default function UpateCategory({categoryId , updateCategoryById }) {
+export default function UpateCategory({categoryId , getCategoriesList , categoryName }) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+
+  const updateCategoryById = async (id, updatedData) => {
+    let token = localStorage.getItem("adminToken");
+    
+    try {
+      await axios.put(
+        `https://upskilling-egypt.com:443/api/v1/Category/${id}`,
+        updatedData,
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+      console.log("Category updated successfully");
+      toast.success("Category updated successfully");
+      handleClose(); // Close the modal after successful update
+      getCategoriesList()
+    } catch (error) {
+      console.error("Error updating category:", error);
+      toast.error("Failed to update category. Please try again.");
+    }
+  };
+
+  const onSubmit = (data) => {
+    console.log(data);
+    updateCategoryById(categoryId, data);
+  };
+
+
   return (
     <>
       <button
         className="btn btn-success mx-3"
         onClick={() => {
           handleShow();
+          console.log(categoryId);
+          console.log(categoryName);
         }}
       >
         Update
@@ -39,7 +78,7 @@ export default function UpateCategory({categoryId , updateCategoryById }) {
             ></i>
           </div>
           <Modal.Body>
-            <form className="pt-5 mt-5">
+            <form onSubmit={handleSubmit(onSubmit)} className="pt-5 mt-5">
               <div className="input-group flex-nowrap mb-3">
                 <input
                   type="text"
@@ -47,19 +86,18 @@ export default function UpateCategory({categoryId , updateCategoryById }) {
                   placeholder="Enter name"
                   aria-label="Enter name"
                   aria-describedby="addon-wrapping"
-                //   {...register("name", {
-                //     required: "name is required",
-                //   })}
+                  {...register("name", {
+                    required: "name is required",
+                  })}
+                  defaultValue={categoryName}
                 />
               </div>
-              {/* {errors.name && (
+              {errors.name && (
                 <p className="alert alert-danger">{errors.name.message}</p>
-              )} */}
+              )}
 
               <div className="text-end mt-4">
-                <button className="w-25 btn btn-success" onClick={() => {
-                    updateCategoryById(categoryId  )
-                }}>Update</button>
+                <button type="submit" className="w-25 btn btn-success">Update</button>
               </div>
             </form>
           </Modal.Body>

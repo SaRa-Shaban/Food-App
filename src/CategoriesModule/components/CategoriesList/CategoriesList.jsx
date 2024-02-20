@@ -61,6 +61,7 @@ export default function CategoriesList() {
         }
       );
       setcategorisList(categoriesList.data.data);
+      
       // console.log(categoriesList.data.data);
     } catch (error) {
       console.log(error.response.data.message);
@@ -89,28 +90,8 @@ export default function CategoriesList() {
     }
   };
 
-  const updateCategoryById = async (id, updatedData) => {
-    let token = localStorage.getItem("adminToken");
+
   
-    try {
-      await axios.put(
-        `https://upskilling-egypt.com:443/api/v1/Category/${id}`,
-        updatedData,
-        {
-          headers: {
-            Authorization: token,
-          },
-        }
-      );
-      console.log("Category updated successfully");
-      // Assuming you want to refresh the categories list after update
-      getCategoriesList();
-    } catch (error) {
-      console.error("Error updating category:", error);
-      // Handle error appropriately, e.g., displaying a toast message
-      // toast.error("Failed to update category. Please try again.");
-    }
-  };
   
 
   useEffect(() => {
@@ -157,7 +138,7 @@ export default function CategoriesList() {
                     <th scope="row">{category.id}</th>
                     <td>{category.name}</td>
                     <td>
-                      <UpateCategory updateCategoryById={updateCategoryById} categoryId={category.id} />
+                      <UpateCategory categoryName={category.name} categoryId={category.id} getCategoriesList={getCategoriesList}/>
                       <DeleteCategory categoryId={category.id} deleteCategoryById={deleteCategoryById}/>
                     </td>
                   </tr>
