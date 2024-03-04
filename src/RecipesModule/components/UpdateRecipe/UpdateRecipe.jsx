@@ -5,9 +5,9 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { useParams } from "react-router-dom";
 
-export default function RecipesData() {
+export default function UpdateRecipe() {
   // useSearchParam >>>>>
-  const action= useParams();
+  const action = useParams();
 
   const isAddAction = action === "add";
   const isUpdateAction = action === "update";
@@ -127,7 +127,7 @@ export default function RecipesData() {
         }
       );
       settagsList(tagsList.data);
-      // console.log(tagsList.data);
+      console.log(tagsList.data);
     } catch (error) {
       console.log(error);
       // toast.error(error.response.data.message);
@@ -158,19 +158,6 @@ export default function RecipesData() {
     }
   };
 
-  const handleSubmitForm = (data) => {
-    console.log(data);
-    console.log(action);
-    console.log(isAddAction);
-    console.log(isUpdateAction);
-    if (isAddAction) {
-      console.log("add");
-      onSubmitAdd(data);
-    } else if (isUpdateAction) {
-      console.log("update");
-      onSubmitUpdate(data);
-    }
-  };
 
   useEffect(() => {
     getCategoriesList();
@@ -184,7 +171,7 @@ export default function RecipesData() {
       <HeaderRecipe />
 
       <div className="p-5">
-        <form onSubmit={handleSubmit(onSubmitAdd)} className="pt-5 mt-5">
+        <form onSubmit={handleSubmit(onSubmitUpdate)} className="pt-5 mt-5">
           <div className="input-group flex-nowrap mb-3">
             <input
               type="text"

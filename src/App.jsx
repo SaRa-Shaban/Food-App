@@ -19,6 +19,7 @@ import RecipesData from "./RecipesModule/components/RecipesData/RecipesData";
 import Register from "./AuthModule/components/Register/Register";
 import VerifyUserAccount from "./AuthModule/components/VerifyUserAccount/VerifyUserAccount";
 import FavouriteList from "./FavouriteModule/components/FavouriteList/FavouriteList";
+import UpdateRecipe from "./RecipesModule/components/UpdateRecipe/UpdateRecipe";
 
 function App() {
   // adminData is LoginData
@@ -50,6 +51,7 @@ function App() {
         { index: true, element: <Home adminData={adminData} /> },
         { path: "recipes", element: <RecipesList adminData={adminData} /> },
         { path: "recipes-data", element: <RecipesData /> },
+        { path: "update-recipe", element: <UpdateRecipe /> },
         { path: "users", element: <UsersList /> },
         { path: "categories", element: <CategoriesList /> },
         { path: "favourite", element: <FavouriteList /> },

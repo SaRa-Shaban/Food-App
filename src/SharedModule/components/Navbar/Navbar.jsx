@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function Navbar({ adminData }) {
-  console.log(adminData);
+  // console.log(adminData);
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">

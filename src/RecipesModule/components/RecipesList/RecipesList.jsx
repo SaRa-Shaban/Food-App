@@ -7,7 +7,7 @@ import Modal from "react-bootstrap/Modal";
 import { useNavigate } from "react-router-dom";
 
 export default function RecipesList() {
-  console.log(JSON.parse(localStorage.getItem('adminData')));
+  // console.log(JSON.parse(localStorage.getItem('adminData')));
   const adminData = JSON.parse(localStorage.getItem('adminData'))
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
@@ -74,11 +74,11 @@ export default function RecipesList() {
   };
 
   const handleAddClick = () => {
-    navigate("/dashboard/recipes-data?action=add");
+    navigate("/dashboard/recipes-data");
   };
 
   const handleUpdateClick = () => {
-    navigate(`/dashboard/recipes-data?action=update`);
+    navigate(`/dashboard/update-recipe`);
   };
 
   const handleClose = () => setShow(false);
@@ -110,6 +110,7 @@ export default function RecipesList() {
         }
       );
       // console.log(response.data.totalNumberOfPages);
+      console.log(response.data.data);
       setpages(
         Array(response.data.totalNumberOfPages)
           .fill()
@@ -328,7 +329,7 @@ export default function RecipesList() {
                           );
                           localStorage.setItem(
                             "tagId",
-                            +JSON.stringify(recipe.tagId.id)
+                            +JSON.stringify(recipe.tag.id)
                           );
                           localStorage.setItem(
                             "categoriesIds",
