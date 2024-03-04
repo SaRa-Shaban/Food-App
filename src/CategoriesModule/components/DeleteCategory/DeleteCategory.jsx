@@ -26,7 +26,7 @@ export default function DeleteCategory({ deleteCategoryById, categoryId }) {
           handleShow();
         }}
       >
-        Delete
+        <i className="fa-solid fa-trash"></i>
       </button>
 
       <Modal show={show} onHide={handleClose}>
@@ -39,22 +39,22 @@ export default function DeleteCategory({ deleteCategoryById, categoryId }) {
             ></i>
           </div>
           <Modal.Body>
-          <div className="text-center">
-            <img src={noData} alt="" />
-            <h2 className="my-3">Delete this User</h2>
-            <p className="my-3">
-              are you sure you want to delete this item? if you are sure just{" "}
-              <br /> click on delete it
-            </p>
+            <div className="text-center">
+              <img src={noData} alt="" />
+              <h2 className="my-3">Delete this User</h2>
+              <p className="my-3">
+                are you sure you want to delete this item? if you are sure just{" "}
+                <br /> click on delete it
+              </p>
               <div className="text-end">
-              <button
-                className="btn btn-danger"
-                onClick={() => {
-                  deleteCategoryById(categoryId);
-                }}
-              >
-                Delete this item
-              </button>
+                <button
+                  className="btn btn-danger"
+                  onClick={() => {
+                    deleteCategoryById(categoryId);
+                  }}
+                >
+                  Delete this item
+                </button>
               </div>
             </div>
           </Modal.Body>

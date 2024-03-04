@@ -6,7 +6,7 @@ import toggler from "./../../../assets/images/toggler.png";
 import ChangePass from "../../../AuthModule/components/ChangePass/ChangePass";
 import Modal from "react-bootstrap/Modal";
 
-export default function SideBar() {
+export default function SideBar({adminData}) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -27,7 +27,7 @@ export default function SideBar() {
   return (
     <>
       <div className="sidebar-container">
-        <Sidebar collapsed={isCollapsed}>
+        <Sidebar  collapsed={isCollapsed}>
           <Menu>
             <MenuItem
               className=" d-flex justify-content-center align-items-center"
@@ -41,7 +41,7 @@ export default function SideBar() {
             >
               Home
             </MenuItem>
-            <MenuItem
+            {adminData?.userGroup == "SuperAdmin"  ?  <MenuItem
               icon={
                 <i className="fa-solid fa-user-group" aria-hidden="true"></i>
               }
@@ -49,7 +49,7 @@ export default function SideBar() {
             >
               {" "}
               Users
-            </MenuItem>
+            </MenuItem> :'' }
             <MenuItem
               icon={
                 <i
@@ -62,7 +62,20 @@ export default function SideBar() {
               {" "}
               Recipes
             </MenuItem>
-            <MenuItem
+
+            {adminData?.userGroup == "SystemUser"  ?  <MenuItem
+              icon={
+                <i className="fa-solid fa-heart" aria-hidden="true"></i>
+              }
+              component={<Link to="/dashboard/favourite" />}
+            >
+              {" "}
+              favourite
+            </MenuItem> :'' }
+
+            
+
+            {adminData?.userGroup == "SuperAdmin"  ?  <MenuItem
               icon={
                 <i
                   className="fa-regular fa-calendar-days"
@@ -73,7 +86,9 @@ export default function SideBar() {
             >
               {" "}
               Categories
-            </MenuItem>
+            </MenuItem>:'' }
+            
+
             <MenuItem
               onClick={handleShow}
               icon={<i className="fa fa-unlock" aria-hidden="true"></i>}

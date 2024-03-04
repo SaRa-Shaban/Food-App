@@ -11,7 +11,9 @@
 .sidebar-container .ps-sidebar-container{
     color: white;
     background-color: #1f263E;
+    /* position: fixed; */
     height: 100vh;
+    border-top-right-radius: 50px;
 }
 
 
@@ -34,3 +36,11 @@
     background-repeat: no-repeat;
     background-position: right;
 }
+
+.sidebar-container{
+    position: relative;
+}
+
+.css-dip3t8 {
+    position: fixed !important;
+  }

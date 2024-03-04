@@ -2,7 +2,7 @@ import { useState , useEffect } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { RouterProvider, createBrowserRouter, json } from "react-router-dom";
 import AuthLayout from "./SharedModule/components/AuthLayout/AuthLayout";
 import MasterLayout from "./SharedModule/components/MasterLayout/MasterLayout";
 import Login from "./AuthModule/components/Login/Login";
@@ -15,14 +15,20 @@ import Home from "./HomeModule/components/Home/Home";
 import { jwtDecode } from "jwt-decode";
 import ProtectedRoute from "./SharedModule/components/ProtectedRoute/ProtectedRoute";
 import ResetPass from "./AuthModule/components/ResetPass/ResetPass";
+import RecipesData from "./RecipesModule/components/RecipesData/RecipesData";
+import Register from "./AuthModule/components/Register/Register";
+import VerifyUserAccount from "./AuthModule/components/VerifyUserAccount/VerifyUserAccount";
+import FavouriteList from "./FavouriteModule/components/FavouriteList/FavouriteList";
 
 function App() {
+  // adminData is LoginData
   const [adminData, setadminData] = useState(null);
 
   let saveAdminData = () => {
     let encodedToken = localStorage.getItem("adminToken");
     let decodedToken = jwtDecode(encodedToken);
     // console.log(decodedToken);
+    localStorage.setItem('adminData' , JSON.stringify(decodedToken))
     setadminData(decodedToken);
   };
 
@@ -43,8 +49,12 @@ function App() {
       children: [
         { index: true, element: <Home adminData={adminData} /> },
         { path: "recipes", element: <RecipesList adminData={adminData} /> },
+        { path: "recipes-data", element: <RecipesData /> },
         { path: "users", element: <UsersList /> },
         { path: "categories", element: <CategoriesList /> },
+        { path: "favourite", element: <FavouriteList /> },
+
+
       ],
     },
 
@@ -57,6 +67,8 @@ function App() {
         { path: "login", element: <Login saveAdminData={saveAdminData} /> },
         { path: "forgot-pass", element: <ForgotPass /> },
         { path: "reset-pass", element: <ResetPass /> },
+        { path: "register", element: <Register /> },
+        { path: "verification", element: <VerifyUserAccount /> },
 
       ],
     },

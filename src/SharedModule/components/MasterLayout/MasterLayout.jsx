@@ -10,7 +10,7 @@ export default function MasterLayout({adminData}) {
       <div>
         <div className="d-flex">
           <div>
-            <Sidebar />
+            <Sidebar adminData={adminData} />
           </div>
           <div className="w-100">
             <Navbar adminData={adminData}/>

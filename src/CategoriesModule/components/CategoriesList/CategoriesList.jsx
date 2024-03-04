@@ -17,6 +17,9 @@ import UpateCategory from "../UpdateCategory/UpateCategory";
 export default function CategoriesList() {
   const [categorisList, setcategorisList] = useState([]);
   const [show, setShow] = useState(false);
+  const [pages, setpages] = useState([]);
+  const [searchName, setsearchName] = useState("");
+
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -46,25 +49,33 @@ export default function CategoriesList() {
     }
   };
 
-  const getCategoriesList = async (data) => {
+  const getCategoriesList = async (pageNo, pageSize, name) => {
     // console.log(data);
     let token = localStorage.getItem("adminToken");
 
     try {
       let categoriesList = await axios.get(
-        "https://upskilling-egypt.com:443/api/v1/Category/?pageSize=10&pageNumber=1",
+        "https://upskilling-egypt.com:443/api/v1/Category/",
         {
-          data,
           headers: {
             Authorization: token, // "Authorization" should be spelled correctly
           },
+          params: {
+            pageNumber: pageNo,
+            pageSize: pageSize,
+            name: name,
+          },
         }
       );
+      setpages(
+        Array(categoriesList.data.totalNumberOfPages)
+          .fill()
+          .map((_, i) => i + 1)
+      );
       setcategorisList(categoriesList.data.data);
-      
       // console.log(categoriesList.data.data);
     } catch (error) {
-      console.log(error.response.data.message);
+      console.log(error.response);
       // toast.error(error.response.data.message);
     }
   };
@@ -90,12 +101,14 @@ export default function CategoriesList() {
     }
   };
 
-
-  
-  
+  const getNameValue = (input) => {
+    // console.log(input.target.value);
+    setsearchName(input.target.value);
+    getCategoriesList(1, 5, input.target.value);
+  };
 
   useEffect(() => {
-    getCategoriesList();
+    getCategoriesList(1, 5, searchName);
   }, []);
 
   return (
@@ -110,7 +123,7 @@ export default function CategoriesList() {
 
       <div className=" d-flex justify-content-between align-items-center m-3 p-3">
         <div className="">
-          <h4>Users Table Details</h4>
+          <h4>Categories Table Details</h4>
           <p className="text-muted">You can check all details</p>
         </div>
 
@@ -118,6 +131,12 @@ export default function CategoriesList() {
           <button className="btn btn-success" onClick={handleShow}>
             Add New Catrgory
           </button>
+        </div>
+      </div>
+
+      <div className="row px-4 py-2">
+        <div className="col-md-6">
+          <input type="text" className="form-control" onChange={getNameValue} />
         </div>
       </div>
 
@@ -138,21 +157,51 @@ export default function CategoriesList() {
                     <th scope="row">{category.id}</th>
                     <td>{category.name}</td>
                     <td>
-                      <UpateCategory categoryName={category.name} categoryId={category.id} getCategoriesList={getCategoriesList}/>
-                      <DeleteCategory categoryId={category.id} deleteCategoryById={deleteCategoryById}/>
+                      <UpateCategory
+                        categoryName={category.name}
+                        categoryId={category.id}
+                        getCategoriesList={getCategoriesList}
+                      />
+                      <DeleteCategory
+                        categoryId={category.id}
+                        deleteCategoryById={deleteCategoryById}
+                      />
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
+
+            <nav aria-label="Page navigation example">
+              <ul className="pagination">
+                <li className="page-item">
+                  <a className="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">«</span>
+                  </a>
+                </li>
+                {pages.map((page) => (
+                  <li
+                    key={page}
+                    className="page-item"
+                    onClick={() => getCategoriesList(page, 5)}
+                  >
+                    <a className="page-link">{page}</a>
+                  </li>
+                ))}
+                <li className="page-item">
+                  <a className="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">»</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
           </div>
         ) : (
           <div className="text-center">
             <img src={noData} alt="" />
             <h4 className="my-3">No Data !</h4>
             <p>
-              are you sure you want to delete this item ? if you are sure just{" "}
-              <br /> click on delete it
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. <br />Natus, est neque?
             </p>
           </div>
         )}

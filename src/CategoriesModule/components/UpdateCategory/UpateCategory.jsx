@@ -64,7 +64,7 @@ export default function UpateCategory({categoryId , getCategoriesList , category
           console.log(categoryName);
         }}
       >
-        Update
+        <i className="fa-solid fa-pen-to-square"></i>
       </button>
 
       <Modal show={show} onHide={handleClose}>

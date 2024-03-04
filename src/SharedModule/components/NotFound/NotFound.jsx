@@ -1,8 +1,10 @@
 import React from "react";
 import notFound from "../../../assets/images/notFound.png";
 import logo from '../../../assets/images/logo.png'
+import { useNavigate } from "react-router-dom";
 
 export default function NotFound() {
+  const navigate = useNavigate()
   return (
     <>
       <div className="not-found  vh-100">
@@ -17,7 +19,9 @@ export default function NotFound() {
                   This Page doesn’t exist or was removed! <br /> We suggest you back to
                   home.
                 </p>
-                <button className="btn btn-success w-75 mt-5">back to <br/> <i className="fa fa-arrow-left pe-2"></i> home </button>
+                <button onClick={() => {
+                  navigate('/dashboard')
+                }} className="btn btn-success w-75 mt-5">back to <br/> <i className="fa fa-arrow-left pe-2"></i> home </button>
               </div>
             </div>
 
